@@ -1,4 +1,6 @@
 import { useReducer, useCallback } from "react";
+import { useDispatch } from "react-redux";
+import { loadingActions } from "../store/loading";
 
 const httpReducer = (state, action) => {
   if (action.type === "SEND") {
@@ -20,7 +22,7 @@ const httpReducer = (state, action) => {
       status: "completed",
     };
   }
-
+  
   return state;
 };
 
@@ -45,6 +47,8 @@ const useHttp = (requestFunction, startWithPending = false) => {
     },
     [requestFunction]
   );
+  const dispatchStatus = useDispatch();
+  dispatchStatus(loadingActions.setStatus({status:httpState.status}));
   return { sendRequest, ...httpState };
 };
 

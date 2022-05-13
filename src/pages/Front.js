@@ -18,7 +18,7 @@ const Front = () => {
     <FrontContainer>
       <Banner>
         <h2>探索。<br />福爾摩沙</h2>
-        <img src={banner} alt="banner" />
+        <img src={banner} alt="banner" className="wow rubberBand" data-wow-duration="2s" />
       </Banner>
       <SitesList title="熱門景點" sites={frontSites?.ScenicSpot}/>
       <SitesList title="觀光活動" sites={activities}/>

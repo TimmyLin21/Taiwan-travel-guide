@@ -14,6 +14,7 @@ import useHttp from "../hooks/useHttp";
 import { getSiteInfo, getNearbySpots } from "../lib/api";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import comingSoon from '../images/comingSoon.webp';
 
 const DetailPage = () => {
   const { sendRequest, data: siteInfo, status } = useHttp(getSiteInfo, true);
@@ -99,8 +100,8 @@ const DetailPage = () => {
         </div>
       </Flex>
       <img
-        src={siteInfo.Picture.PictureUrl1}
-        alt={siteInfo.Picture.PictureDescription1}
+        src={siteInfo.Picture.PictureUrl1 || comingSoon}
+        alt={siteInfo.Picture.PictureDescription1 || 'Coming soon.'}
       />
       <InfoCard>
         <SiteInfo

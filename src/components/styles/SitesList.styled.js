@@ -50,12 +50,20 @@ export const SiteCard = styled.li`
   button {
     width: 100%;
   }
+  figure {
+    overflow: hidden;
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+  }
   img {
     height: 182px;
     width: 100%;
     object-fit: cover;
     object-position: center;
-    border-radius: var(--radius-md) var(--radius-md) 0 0; 
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    transition: .3s ease-in-out;
+    &:hover {
+      transform: scale(1.3);
+    }
   }
   div {
     text-align: left;

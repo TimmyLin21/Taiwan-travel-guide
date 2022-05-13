@@ -128,9 +128,9 @@ const CustomSelect = () => {
   const text = selectedCity ? <p>{selectedCity}<CrossIcon onClick={cancelHandler}/></p> : '目的地';
   return (
     <>
-      <FormControl>
+      <FormControl onClick={optionsToggleHandler}>
         <div>{text}</div>
-        <ArrowDownIcon onClick={optionsToggleHandler}/>
+        <ArrowDownIcon onClick={optionsToggleHandler} $active={optionsIsShow}/>
         {optionsIsShow && (
           <DropdownMenu>
             <ul>{cityList}</ul>

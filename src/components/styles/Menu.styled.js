@@ -10,6 +10,7 @@ export const MenuContainer = styled(Container)`
 `
 
 export const FormControl = styled.div`
+  cursor: pointer;
   position: relative;
   margin-bottom: .75rem;
   input,&>div:first-child {
@@ -47,6 +48,8 @@ export const FormControl = styled.div`
 `
 
 export const ArrowDownIcon = styled.span`
+  transition: transform .5s ease-in-out;
+  ${({ $active }) => ($active ? "transform:rotate(180deg)" : "")};
   &::after {
     content: url(${arrowDown});
   }

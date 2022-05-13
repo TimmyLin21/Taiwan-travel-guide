@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { device } from './break-point';
 import Container from './Container.styled';
+import notFoundIcon from '../../images/notFound.png';
 
 export const SearchPageContainer = styled(Container)`
   padding-top: 1.25rem;
@@ -11,6 +12,7 @@ export const SearchPageContainer = styled(Container)`
   }
   @media ${device.lg} {
     padding-top: 2.5rem;
+    min-height: 822px;
   }
 `
 
@@ -28,5 +30,17 @@ export const PaginationStyled = styled.ul`
     border-radius: var(--radius-sm);
     padding: .75rem;
     
+  }
+`
+
+export const NotFound = styled.div`
+  padding-top: 20vh;
+  width: 100%;
+  text-align: center;
+  p {
+    margin-top: 2rem;
+  }
+  span::after {
+    content: url(${notFoundIcon});
   }
 `
