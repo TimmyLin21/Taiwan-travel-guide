@@ -102,7 +102,7 @@ const CustomSelect = () => {
   const [searchParams] = useSearchParams();
 
   const optionsIsShow = useSelector((state) => state.header.optionsIsShow);
-  const selectedCity = searchParams.get('city') === null ? 1:0;
+  const selectedCity = searchParams.get('city');
   
   const cityChangeHandler = (e) => {
     const city = e.target.dataset.name;

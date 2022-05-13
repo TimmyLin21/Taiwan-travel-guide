@@ -10,10 +10,8 @@ const useSearch = () => {
   const searchResult = (searchInfo) => {
     let {city, keyword, theme} = searchInfo;
 
-    if (city && city !== 'undefined') {
-      city = selectedCity;
-    } else {
-      city = 'undefined';
+    if (selectedCity && !city) {
+      theme = selectedCity;
     }
 
     if (keyword && keyword !== 'undefined') {
@@ -22,10 +20,8 @@ const useSearch = () => {
       keyword = 'undefined';
     }
 
-    if (theme && theme !== 'undefined') {
+    if (selectedTheme && !theme) {
       theme = selectedTheme;
-    } else {
-      theme = 'undefined';
     }
 
     navigate({

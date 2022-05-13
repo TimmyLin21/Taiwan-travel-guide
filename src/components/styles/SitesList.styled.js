@@ -79,6 +79,7 @@ export const LocationIcon = styled.span`
   &::after {
     content: url(${location});
     vertical-align: middle;
+    margin-right: .5rem;
   }
 `
 
@@ -86,6 +87,7 @@ export const TimeIcon = styled.span`
   &::after {
     content: url(${time});
     vertical-align: middle;
+    margin-right: .5rem;
   }
 `
 
@@ -93,5 +95,6 @@ export const PhoneIcon = styled.span`
   &::after {
     content: url(${phone});
     vertical-align: middle;
+    margin-right: .5rem;
   }
 `
