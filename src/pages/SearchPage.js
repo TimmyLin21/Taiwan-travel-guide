@@ -4,6 +4,7 @@ import SiteItem from "../components/sites/SiteItem";
 import Pagination from "../components/Pagination";
 import { useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import {
   getCultureSpots,
   getOutdoorSpots,
@@ -52,29 +53,30 @@ const SearchPage = () => {
     true
   );
 
-  const city = searchParams.get("city");
+  const cityName = useSelector((state) => state.header.selectedCity?.cityName);
+  const cityEngName = useSelector((state) => state.header.selectedCity?.cityEngName);
   const keyword = searchParams.get("keyword");
   const theme = searchParams.get("theme");
 
   let sitesList;
 
   useEffect(() => {
-    if (theme === "歷史文化") {
-      requestCultureSpots(city);
+    if (theme === "歷史文化" || theme === 'undefined') {
+      requestCultureSpots(cityEngName);
     } else if (theme === "戶外踏青") {
-      requestOutdoorSpots(city);
+      requestOutdoorSpots(cityEngName);
     } else if (theme === "宗教巡禮") {
-      requestTempleSpots(city);
+      requestTempleSpots(cityEngName);
     } else if (theme === '親子活動') {
-      requestFamilyActivities(city);
+      requestFamilyActivities(cityEngName);
     } else if (theme === '風景區') {
-      requestScenicAreas(city);
+      requestScenicAreas(cityEngName);
     } else if (theme === '美食品嚐') {
-      requestRestaurants(city);
+      requestRestaurants(cityEngName);
     } else if (theme === '住宿推薦') {
-      requestHotels(city);
+      requestHotels(cityEngName);
     } else if (theme === '觀光活動') {
-      requestActivities(city);
+      requestActivities(cityEngName);
     }
   }, [
     requestCultureSpots,
@@ -87,7 +89,7 @@ const SearchPage = () => {
     requestActivities,
     keyword,
     theme,
-    city,
+    cityEngName,
   ]);
   switch (theme) {
     case "歷史文化":
@@ -179,11 +181,20 @@ const SearchPage = () => {
       }
       break;
     default:
+      if (cultureSpots) {
+        sitesList = cultureSpots.map((site) => (
+          <SiteItem
+            siteInfo={site}
+            id={site.ScenicSpotID}
+            key={site.ScenicSpotID}
+          />
+        ));
+      }
   }
 
   return (
     <SearchPageContainer>
-      <h2>{city === "undefined" ? "台灣" : city}</h2>
+      <h2>{cityName === "undefined" ? "台灣" : cityName}</h2>
       <SiteGrid>{sitesList}</SiteGrid>
       <Pagination />
     </SearchPageContainer>

@@ -9,12 +9,15 @@ const MainHeader = () => {
   const menuToggleHandler = () => {
     dispatch(headerActions.menuToggle());
   };
+  const clearHandler = () => {
+    dispatch(headerActions.changeCity({city: ''}));
+  }
 
   return (
     <Header>
       <Container>
         <MenuToggler onClick={menuToggleHandler}/>
-        <Logo to="/">
+        <Logo to="/" onClick={clearHandler}>
           <img src={logo} alt="Taiwan Travel logo" />
         </Logo>
         <div />

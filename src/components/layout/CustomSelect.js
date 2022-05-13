@@ -3,7 +3,6 @@ import { ArrowDownIcon, DropdownMenu } from "../styles/Menu.styled";
 import { useDispatch, useSelector } from "react-redux";
 import { headerActions } from "../../store/header";
 import useSearch from "../../hooks/useSearch";
-import { useSearchParams } from "react-router-dom";
 
 const cities = [
   {
@@ -99,16 +98,16 @@ const cities = [
 const CustomSelect = () => {
   const dispatch = useDispatch();
   const searchResult = useSearch();
-  const [searchParams] = useSearchParams();
 
   const optionsIsShow = useSelector((state) => state.header.optionsIsShow);
-  const selectedCity = searchParams.get('city');
+  const selectedCity = useSelector((state) => state.header.selectedCity?.cityName);
   
   const cityChangeHandler = (e) => {
-    const city = e.target.dataset.name;
-    dispatch(headerActions.changeCity({city}));
+    const cityName = e.target.innerText;
+    const cityEngName = e.target.dataset.name;
+    dispatch(headerActions.changeCity({city: {cityName, cityEngName}}));
     dispatch(headerActions.optionToggle());
-    searchResult({keyword:'', city, theme:''});
+    searchResult({keyword:'', city: cityEngName, theme:''});
   }
   
   const optionsToggleHandler = () => {

@@ -232,5 +232,19 @@ export async function getActivities(city) {
 
   return activities;  
 }
+export async function getNearbySpots(requestInfo) {
+  const { type, position, id} = requestInfo;
+  const response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/${type}?$filter=${type}ID ne '${id}'&$spatialFilter=nearby(${position.lat},${position.lon},5000)&$top=3&$format=JSON`,{
+    method: 'GET',
+    // headers: getAuthorizationHeader(),
+  });
+  const spots = await response.json();
+
+  if (!response.ok) {
+    throw new Error(spots.message || 'Could not get data.');
+  }
+
+  return spots;  
+}
 
 

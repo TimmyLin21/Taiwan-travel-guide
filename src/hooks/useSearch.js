@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 const useSearch = () => {
   const enteredKeyword = useSelector((state) => state.header.enteredKeyword);
-  const selectedCity = useSelector((state) => state.header.selectedCity);
+  const selectedCity = useSelector((state) => state.header.selectedCity?.cityEngName);
   const selectedTheme = useSelector((state) => state.header.selectedTheme);
 
   const navigate = useNavigate();
@@ -11,7 +11,7 @@ const useSearch = () => {
     let {city, keyword, theme} = searchInfo;
 
     if (selectedCity && !city) {
-      theme = selectedCity;
+      city = selectedCity;
     }
 
     if (keyword && keyword !== 'undefined') {
@@ -20,9 +20,7 @@ const useSearch = () => {
       keyword = 'undefined';
     }
 
-    if (selectedTheme && !theme) {
-      theme = selectedTheme;
-    }
+    theme = theme ||selectedTheme;
 
     navigate({
       pathname: '/search',

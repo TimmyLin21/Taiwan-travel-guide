@@ -11,18 +11,23 @@ import {
 import { Flex } from "../components/styles/Flex.styled";
 import { SiteGrid } from "../components/styles/SitesList.styled";
 import useHttp from "../hooks/useHttp";
-import { getSiteInfo } from "../lib/api";
+import { getSiteInfo, getNearbySpots } from "../lib/api";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 const DetailPage = () => {
   const { sendRequest, data: siteInfo, status } = useHttp(getSiteInfo, true);
+  const { sendRequest: requestNearbySpots, data: nearbySpots } = useHttp(
+    getNearbySpots,
+    true
+  );
   const [searchParams] = useSearchParams();
   const id = searchParams.get("id");
   const type = searchParams.get("type");
 
   const navigation = useNavigate();
   const name = `${type}Name`;
+
   const sitePosition = [
     siteInfo?.Position?.PositionLat,
     siteInfo?.Position?.PositionLon,
@@ -42,10 +47,33 @@ const DetailPage = () => {
       url: window.location.href,
     });
   };
-
+  // position: {lat:siteInfo?.position?.PositionLat,lon:siteInfo?.position?.PositionLon}
   useEffect(() => {
     sendRequest({ id, type });
   }, [sendRequest, id, type]);
+
+  useEffect(() => {
+    requestNearbySpots({
+      type,
+      position: {
+        lat: siteInfo?.Position?.PositionLat,
+        lon: siteInfo?.Position?.PositionLon,
+      },
+      id: id
+    });
+  }, [requestNearbySpots, type, siteInfo, id]);
+
+  let mappedSites;
+  if (nearbySpots) {
+    mappedSites = nearbySpots.map((site) => {
+      const id =
+        site.HotelID ||
+        site.RestaurantID ||
+        site.ScenicSpotID ||
+        site.ActivityID;
+      return <SiteItem siteInfo={site} key={id} id={id} />;
+    });
+  }
 
   if (status === "pending") {
     return <div>123</div>;
@@ -104,11 +132,7 @@ const DetailPage = () => {
       </MapContainer>
       <p>{siteInfo.TravelInfo || ""}</p>
       <h3>更多景點</h3>
-      {/* <SiteGrid>
-        <SiteItem src={src} alt={alt} title='天長地久橋'/>
-        <SiteItem src={src} alt={alt} title='天長地久橋'/>
-        <SiteItem src={src} alt={alt} title='天長地久橋'/>
-      </SiteGrid> */}
+      <SiteGrid>{mappedSites}</SiteGrid>
     </DetailContainer>
   );
 };
