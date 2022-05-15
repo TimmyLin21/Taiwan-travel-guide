@@ -4,8 +4,8 @@ const FIREBASE_DOMAIN = 'https://taiwantravelguide-9465d-default-rtdb.asia-south
 // API驗證
 function getAuthorizationHeader() {
   //  填入自己 ID、KEY 開始
-    let AppID = '93ad7bf1688a47a3a7f3c346d675d588';
-    let AppKey = 'TCbubL4-YuFRXkJsNJ64FcGncG0';
+    let AppID = process.env.REACT_APP_ID;
+    let AppKey = process.env.REACT_APP_KEY;
 //  填入自己 ID、KEY 結束
     let GMTString = new Date().toGMTString();
     let ShaObj = new jsSHA('SHA-1', 'TEXT');
