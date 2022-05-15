@@ -6,30 +6,12 @@ import notFoundIcon from '../../images/notFound.png';
 export const SearchPageContainer = styled(Container)`
   padding-top: 1.25rem;
   padding-bottom: 2.5rem;
-  text-align: left;
   h2 {
     margin-bottom: 1.5rem;
   }
   @media ${device.lg} {
     padding-top: 2.5rem;
     min-height: 822px;
-  }
-`
-
-export const PaginationStyled = styled.ul`
-  display: flex;
-  justify-content: center;
-  margin-top: 2.5rem;
-  li:not(:last-child) {
-    margin-right: .5rem;
-  }
-  button {
-    background-color: white;
-    width: 2.75rem;
-    height: 2.75rem;
-    border-radius: var(--radius-sm);
-    padding: .75rem;
-    
   }
 `
 
@@ -42,5 +24,22 @@ export const NotFound = styled.div`
   }
   span::after {
     content: url(${notFoundIcon});
+  }
+`
+
+export const MoreButton = styled.button`
+  color: var(--color-primary);
+  width: 150px;
+  padding: 1rem;
+  background: linear-gradient(to bottom, var(--color-primary) 50%, white 50%);
+  background-size: 100% 200%;
+  background-position: center bottom;
+  transition: all .5s ease-out;
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-sm);
+  margin-top: 1rem;
+  &:hover {
+    background-position: center top;
+    color: white;
   }
 `

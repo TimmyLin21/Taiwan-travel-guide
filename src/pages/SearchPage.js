@@ -1,13 +1,13 @@
 import { SiteGrid } from "../components/styles/SitesList.styled";
 import {
+  MoreButton,
   NotFound,
   SearchPageContainer,
 } from "../components/styles/SearchPage.styled";
 import SiteItem from "../components/sites/SiteItem";
-import Pagination from "../components/Pagination";
 import { useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {
   getCultureSpots,
   getOutdoorSpots,
@@ -19,64 +19,61 @@ import {
   getActivities,
 } from "../lib/api";
 import useHttp from "../hooks/useHttp";
+import { paginationActions } from "../store/pagination";
 
 const SearchPage = () => {
   const [searchParams] = useSearchParams();
+  const pageIndex = useSelector((state) => state.pagination.currentPage);
+  const dispatch = useDispatch();
 
   const { sendRequest: requestCultureSpots, data: cultureSpots } = useHttp(
-    getCultureSpots,
-    true
+    getCultureSpots, false, true
   );
   const { sendRequest: requestOutdoorSpots, data: outdoorSpots } = useHttp(
-    getOutdoorSpots,
-    true
+    getOutdoorSpots, false, true
   );
   const { sendRequest: requestTempleSpots, data: templeSpots } = useHttp(
-    getTempleSpots,
-    true
+    getTempleSpots, false, true
   );
   const { sendRequest: requestFamilyActivities, data: familyActivities } =
-    useHttp(getFamilyActivities, true);
+    useHttp(getFamilyActivities, false, true);
   const { sendRequest: requestScenicAreas, data: scenicAreas } = useHttp(
-    getScenicAreas,
-    true
+    getScenicAreas, false, true
   );
   const { sendRequest: requestRestaurants, data: restaurants } = useHttp(
-    getRestaurants,
-    true
+    getRestaurants, false, true
   );
-  const { sendRequest: requestHotels, data: hotels } = useHttp(getHotels, true);
+  const { sendRequest: requestHotels, data: hotels } = useHttp(getHotels, false, true);
   const { sendRequest: requestActivities, data: activities } = useHttp(
-    getActivities,
-    true
+    getActivities, false, true
   );
 
   const cityName = useSelector((state) => state.header.selectedCity?.cityName);
   const cityEngName = useSelector(
     (state) => state.header.selectedCity?.cityEngName
   );
+  const hasMore = useSelector((state) => state.pagination.hasMore);
+
   const keyword = searchParams.get("keyword");
   const theme = searchParams.get("theme");
-
   let sitesList;
-
   useEffect(() => {
     if (theme === "歷史文化" || theme === "undefined") {
-      requestCultureSpots(cityEngName);
+      requestCultureSpots({city:cityEngName,page:pageIndex});
     } else if (theme === "戶外踏青") {
-      requestOutdoorSpots(cityEngName);
+      requestOutdoorSpots({city:cityEngName,page:pageIndex});
     } else if (theme === "宗教巡禮") {
-      requestTempleSpots(cityEngName);
+      requestTempleSpots({city:cityEngName,page:pageIndex});
     } else if (theme === "親子活動") {
-      requestFamilyActivities(cityEngName);
+      requestFamilyActivities({city:cityEngName,page:pageIndex});
     } else if (theme === "風景區") {
-      requestScenicAreas(cityEngName);
+      requestScenicAreas({city:cityEngName,page:pageIndex});
     } else if (theme === "美食品嚐") {
-      requestRestaurants(cityEngName);
+      requestRestaurants({city:cityEngName,page:pageIndex});
     } else if (theme === "住宿推薦") {
-      requestHotels(cityEngName);
+      requestHotels({city:cityEngName,page:pageIndex});
     } else if (theme === "觀光活動") {
-      requestActivities(cityEngName);
+      requestActivities({city:cityEngName,page:pageIndex});
     }
   }, [
     requestCultureSpots,
@@ -90,6 +87,7 @@ const SearchPage = () => {
     keyword,
     theme,
     cityEngName,
+    pageIndex,
   ]);
   switch (theme) {
     case "歷史文化":
@@ -206,6 +204,10 @@ const SearchPage = () => {
       }
   }
 
+  const clickHandler = () => {
+    dispatch(paginationActions.addPageIndex());
+  }
+
   return (
     <SearchPageContainer>
       <h2>{cityName === "undefined" ? "台灣" : cityName}</h2>
@@ -216,7 +218,7 @@ const SearchPage = () => {
           <p>還沒有相關景點呦  ⸍⚙̥ꇴ⚙̥⸌</p>
         </NotFound>
       )}
-      {sitesList && <Pagination />}
+      {sitesList && hasMore && <MoreButton onClick={clickHandler}>瀏覽更多</MoreButton>}
     </SearchPageContainer>
   );
 };

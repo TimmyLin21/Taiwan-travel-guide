@@ -29,7 +29,7 @@ export async function getFrontSites() {
 
 export async function getSiteInfo(requestInfo) {
   const {id, type} = requestInfo;
-  const response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/${type}?$filter=${type}ID eq '${id}'&$top=30&$format=JSON`,{
+  const response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/${type}?$filter=${type}ID eq '${id}'&$top=9&$format=JSON`,{
     method: 'GET',
     // headers: getAuthorizationHeader(),
   });
@@ -56,15 +56,16 @@ export async function getThreeActivities() {
   return activities; 
 }
 
-export async function getCultureSpots(city) {
+export async function getCultureSpots(requestInfo) {
+  const {city, page} =requestInfo;
   let response;
   if (city && city !== 'undefined') {
-    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${city}?filter=Class1 eq '文化類' or Class2 eq '文化類'&$top=30&$format=JSON`,{
+    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${city}?filter=Class1 eq '文化類' or Class2 eq '文化類'&$top=${page*9}&$format=JSON`,{
       method: 'GET',
       // headers: getAuthorizationHeader(),
     });
   } else {
-    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?filter=Class1 eq '文化類' or Class2 eq '文化類'&$top=30&$format=JSON`,{
+    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?filter=Class1 eq '文化類' or Class2 eq '文化類'&$top=${page*9}&$format=JSON`,{
       method: 'GET',
       // headers: getAuthorizationHeader(),
     });
@@ -78,15 +79,16 @@ export async function getCultureSpots(city) {
   return spots;
 }
 
-export async function getOutdoorSpots(city) {
+export async function getOutdoorSpots(requestInfo) {
+  const {city, page} =requestInfo;
   let response;
   if (city && city !== 'undefined') {
-    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${city}?$top=30&$format=JSON`,{
+    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${city}?$top=${page*9}&$format=JSON`,{
       method: 'GET',
       // headers: getAuthorizationHeader(),
     });
   } else {
-    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?$top=30&$format=JSON`,{
+    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?$top=${page*9}&$format=JSON`,{
       method: 'GET',
       // headers: getAuthorizationHeader(),
     });
@@ -100,15 +102,16 @@ export async function getOutdoorSpots(city) {
   return spots;
 }
 
-export async function getTempleSpots(city) {
+export async function getTempleSpots(requestInfo) {
+  const {city, page} =requestInfo;
   let response;
   if (city && city !== 'undefined') {
-    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${city}?$filter=contains(ScenicSpotName,'寺')&$top=30&$format=JSON`,{
+    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${city}?$filter=contains(ScenicSpotName,'寺')&$top=${page*9}&$format=JSON`,{
       method: 'GET',
       // headers: getAuthorizationHeader(),
     });
   } else {
-    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?$filter=contains(ScenicSpotName,'寺')&$top=30&$format=JSON`,{
+    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?$filter=contains(ScenicSpotName,'寺')&$top=${page*9}&$format=JSON`,{
       method: 'GET',
       // headers: getAuthorizationHeader(),
     });
@@ -122,15 +125,16 @@ export async function getTempleSpots(city) {
   return spots;  
 }
 
-export async function getFamilyActivities(city) {
+export async function getFamilyActivities(requestInfo) {
+  const {city, page} =requestInfo;
   let response;
   if (city && city !== 'undefined') {
-    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity/${city}?$filter=Class1 eq '藝文活動' or Class2 eq '藝文活動'&$top=30&$format=JSON`,{
+    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity/${city}?$filter=Class1 eq '藝文活動' or Class2 eq '藝文活動'&$top=${page*9}&$format=JSON`,{
       method: 'GET',
       // headers: getAuthorizationHeader(),
     });
   } else {
-    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity?$filter=Class1 eq '藝文活動' or Class2 eq '藝文活動'&$top=30&$format=JSON`,{
+    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity?$filter=Class1 eq '藝文活動' or Class2 eq '藝文活動'&$top=${page*9}&$format=JSON`,{
       method: 'GET',
       // headers: getAuthorizationHeader(),
     });
@@ -144,15 +148,16 @@ export async function getFamilyActivities(city) {
   return activities;  
 }
 
-export async function getScenicAreas(city) {
+export async function getScenicAreas(requestInfo) {
+  const {city, page} =requestInfo;
   let response;
   if (city && city !== 'undefined') {
-    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${city}?$filter=Class1 eq '國家風景區類' or Class2 eq '國家風景區類'&$top=30&$format=JSON`,{
+    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${city}?$filter=Class1 eq '國家風景區類' or Class2 eq '國家風景區類'&$top=${page*9}&$format=JSON`,{
       method: 'GET',
       // headers: getAuthorizationHeader(),
     });
   } else {
-    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?$filter=Class1 eq '國家風景區類' or Class2 eq '國家風景區類'&$top=30&$format=JSON`,{
+    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?$filter=Class1 eq '國家風景區類' or Class2 eq '國家風景區類'&$top=${page*9}&$format=JSON`,{
       method: 'GET',
       // headers: getAuthorizationHeader(),
     });
@@ -166,15 +171,16 @@ export async function getScenicAreas(city) {
   return areas;  
 }
 
-export async function getRestaurants(city) {
+export async function getRestaurants(requestInfo) {
+  const {city, page} =requestInfo;
   let response;
   if (city && city !== 'undefined') {
-    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant/${city}?$top=30&$format=JSON`,{
+    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant/${city}?$top=${page*9}&$format=JSON`,{
       method: 'GET',
       // headers: getAuthorizationHeader(),
     });
   } else {
-    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant?$top=30&$format=JSON`,{
+    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant?$top=${page*9}&$format=JSON`,{
       method: 'GET',
       // headers: getAuthorizationHeader(),
     });
@@ -188,15 +194,16 @@ export async function getRestaurants(city) {
   return restaurants;  
 }
 
-export async function getHotels(city) {
+export async function getHotels(requestInfo) {
+  const {city, page} =requestInfo;
   let response;
   if (city && city !== 'undefined') {
-    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Hotel/${city}?$top=30&$format=JSON`,{
+    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Hotel/${city}?$top=${page*9}&$format=JSON`,{
       method: 'GET',
       // headers: getAuthorizationHeader(),
     });
   } else {
-    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Hotel?$top=30&$format=JSON`,{
+    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Hotel?$top=${page*9}&$format=JSON`,{
       method: 'GET',
       // headers: getAuthorizationHeader(),
     });
@@ -210,15 +217,16 @@ export async function getHotels(city) {
   return hotels;  
 }
 
-export async function getActivities(city) {
+export async function getActivities(requestInfo) {
+  const {city, page} =requestInfo;
   let response;
   if (city && city !== 'undefined') {
-    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity/${city}?$top=30&$format=JSON`,{
+    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity/${city}?$top=${page*9}&$format=JSON`,{
       method: 'GET',
       // headers: getAuthorizationHeader(),
     });
   } else {
-    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity?$top=30&$format=JSON`,{
+    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity?$top=${page*9}&$format=JSON`,{
       method: 'GET',
       // headers: getAuthorizationHeader(),
     });

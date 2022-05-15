@@ -13,6 +13,7 @@ import {
 
 import { useDispatch } from "react-redux";
 import { headerActions } from "../../store/header";
+import { paginationActions } from "../../store/pagination";
 import useSearch from "../../hooks/useSearch";
 import { useSearchParams } from "react-router-dom";
 
@@ -26,6 +27,8 @@ const FeaturedThemes = () => {
   const changeThemeHandler = (e) => {
     const theme = e.target.dataset.theme;
     dispatch(headerActions.changeTheme({theme}));
+    dispatch(paginationActions.clearPageIndex());
+    window.scrollTo({top:0, behavior:'smooth'});
     searchResult({keyword:'', city: '', theme});
   }
 

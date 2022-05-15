@@ -2,6 +2,7 @@ import { CrossIcon, FormControl } from "../styles/Menu.styled";
 import { ArrowDownIcon, DropdownMenu } from "../styles/Menu.styled";
 import { useDispatch, useSelector } from "react-redux";
 import { headerActions } from "../../store/header";
+import { paginationActions } from "../../store/pagination";
 import useSearch from "../../hooks/useSearch";
 
 const cities = [
@@ -107,15 +108,18 @@ const CustomSelect = () => {
     const cityEngName = e.target.dataset.name;
     dispatch(headerActions.changeCity({city: {cityName, cityEngName}}));
     dispatch(headerActions.optionToggle());
+    dispatch(paginationActions.clearPageIndex());
     searchResult({keyword:'', city: cityEngName, theme:''});
   }
   
-  const optionsToggleHandler = () => {
+  const optionsToggleHandler = (e) => {
+    e.stopPropagation();
     dispatch(headerActions.optionToggle());
   }
 
   const cancelHandler = () => {
     dispatch(headerActions.changeCity({city: null}));
+    dispatch(paginationActions.clearPageIndex());
     searchResult({keyword:'', city: null, theme:''});
   }
 

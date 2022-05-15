@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 
 export const Logo = styled(Link)`
   text-decoration: none;
+  animation: slideInLeft;
+  animation-duration: 1s;
   img {
     height: 2.5rem;
     @media ${device.lg} {

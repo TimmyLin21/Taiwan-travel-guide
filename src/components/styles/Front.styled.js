@@ -11,6 +11,8 @@ export const Banner = styled.div`
   justify-content: space-around;
   border-radius: var(--radius-md);
   margin-bottom: 2.5rem;
+  animation: zoomIn;
+  animation-duration: 1s;
   img {
     width: 40%;
   }

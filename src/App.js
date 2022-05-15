@@ -7,17 +7,10 @@ import { Routes, Route } from "react-router-dom";
 import NotFound from "./pages/NotFound";
 import Loading from "./components/loading/Loading";
 import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import WOW from 'wowjs';
+import 'animate.css';
 
 function App() {
   const status = useSelector((state) => state.loading.status);
-
-  useEffect(() => {
-    new WOW.WOW({
-      live: false
-    }).init();
-  }, [])
 
   return (
     <>
