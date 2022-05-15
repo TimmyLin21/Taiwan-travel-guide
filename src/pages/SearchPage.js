@@ -53,7 +53,7 @@ const SearchPage = () => {
     (state) => state.header.selectedCity?.cityEngName
   );
   const hasMore = useSelector((state) => state.pagination.hasMore);
-
+  const loadingStatus = useSelector((state) => state.loading.status);
   const keyword = useSelector((state) => state.header.enteredKeyword);
   const theme = searchParams.get("theme");
   let sitesList;
@@ -212,7 +212,8 @@ const SearchPage = () => {
     <SearchPageContainer>
       <h2>{cityName === "undefined" ? "台灣" : cityName}</h2>
       {sitesList && <SiteGrid>{sitesList}</SiteGrid>}
-      {!sitesList && (
+      {!sitesList && loadingStatus === 'pending' && ('')}
+      {!sitesList && loadingStatus === 'completed' && (
         <NotFound>
           <span />
           <p>還沒有相關景點呦  ⸍⚙̥ꇴ⚙̥⸌</p>
