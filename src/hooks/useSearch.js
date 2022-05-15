@@ -12,12 +12,14 @@ const useSearch = () => {
 
     if (selectedCity && !city) {
       city = selectedCity;
+    } else if (city === ''){
+      city = undefined;
     }
 
-    if (keyword && keyword !== 'undefined') {
+    if (enteredKeyword && !keyword) {
       keyword = enteredKeyword;
-    } else {
-      keyword = 'undefined';
+    } else if (keyword === '') {
+      keyword = undefined;
     }
 
     theme = theme ||selectedTheme;

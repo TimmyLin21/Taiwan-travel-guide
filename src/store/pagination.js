@@ -9,13 +9,15 @@ const paginationSlice = createSlice({
   reducers: {
     addPageIndex(state) {
       state.currentPage += 1;
-      state.hasMore = true;
     },
     clearPageIndex(state) {
       state.currentPage = 1;
     },
     delHasMore(state) {
       state.hasMore = false;
+    },
+    addHasMore(state) {
+      state.hasMore = true;
     }
   }
 })

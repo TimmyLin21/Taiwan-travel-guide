@@ -54,26 +54,26 @@ const SearchPage = () => {
   );
   const hasMore = useSelector((state) => state.pagination.hasMore);
 
-  const keyword = searchParams.get("keyword");
+  const keyword = useSelector((state) => state.header.enteredKeyword);
   const theme = searchParams.get("theme");
   let sitesList;
   useEffect(() => {
-    if (theme === "歷史文化" || theme === "undefined") {
-      requestCultureSpots({city:cityEngName,page:pageIndex});
-    } else if (theme === "戶外踏青") {
-      requestOutdoorSpots({city:cityEngName,page:pageIndex});
+    if (theme === "歷史文化") {
+      requestCultureSpots({city:cityEngName,page:pageIndex, keyword});
+    } else if (theme === "戶外踏青" || theme === "undefined") {
+      requestOutdoorSpots({city:cityEngName,page:pageIndex, keyword});
     } else if (theme === "宗教巡禮") {
-      requestTempleSpots({city:cityEngName,page:pageIndex});
+      requestTempleSpots({city:cityEngName,page:pageIndex, keyword});
     } else if (theme === "親子活動") {
-      requestFamilyActivities({city:cityEngName,page:pageIndex});
+      requestFamilyActivities({city:cityEngName,page:pageIndex, keyword});
     } else if (theme === "風景區") {
-      requestScenicAreas({city:cityEngName,page:pageIndex});
+      requestScenicAreas({city:cityEngName,page:pageIndex, keyword});
     } else if (theme === "美食品嚐") {
-      requestRestaurants({city:cityEngName,page:pageIndex});
+      requestRestaurants({city:cityEngName,page:pageIndex, keyword});
     } else if (theme === "住宿推薦") {
-      requestHotels({city:cityEngName,page:pageIndex});
+      requestHotels({city:cityEngName,page:pageIndex, keyword});
     } else if (theme === "觀光活動") {
-      requestActivities({city:cityEngName,page:pageIndex});
+      requestActivities({city:cityEngName,page:pageIndex, keyword});
     }
   }, [
     requestCultureSpots,
@@ -191,8 +191,8 @@ const SearchPage = () => {
       }
       break;
     default:
-      if (cultureSpots && cultureSpots.length > 0) {
-        sitesList = cultureSpots.map((site) => (
+      if (outdoorSpots && outdoorSpots.length > 0) {
+        sitesList = outdoorSpots.map((site) => (
           <SiteItem
             siteInfo={site}
             id={site.ScenicSpotID}

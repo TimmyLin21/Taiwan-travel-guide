@@ -31,7 +31,7 @@ export async function getSiteInfo(requestInfo) {
   const {id, type} = requestInfo;
   const response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/${type}?$filter=${type}ID eq '${id}'&$top=9&$format=JSON`,{
     method: 'GET',
-    // headers: getAuthorizationHeader(),
+    headers: getAuthorizationHeader(),
   });
   const siteInfo = await response.json();
 
@@ -45,7 +45,7 @@ export async function getSiteInfo(requestInfo) {
 export async function getThreeActivities() {
   const response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity?$skip=5&$top=3&$format=JSON`,{
     method: 'GET',
-    // headers: getAuthorizationHeader(),
+    headers: getAuthorizationHeader(),
   });
   const activities = await response.json();
 
@@ -57,18 +57,32 @@ export async function getThreeActivities() {
 }
 
 export async function getCultureSpots(requestInfo) {
-  const {city, page} =requestInfo;
+  const {city, page, keyword} =requestInfo;
   let response;
   if (city && city !== 'undefined') {
-    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${city}?filter=Class1 eq '文化類' or Class2 eq '文化類'&$top=${page*9}&$format=JSON`,{
-      method: 'GET',
-      // headers: getAuthorizationHeader(),
-    });
+    if (keyword) {
+      response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${city}?$filter=contains(ScenicSpotName, '${keyword}')&$top=${page*9}&$format=JSON`,{
+        method: 'GET',
+        headers: getAuthorizationHeader(),
+      });
+    } else {
+      response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${city}?$filter=Class1 eq '文化類' or Class2 eq '文化類'&$top=${page*9}&$format=JSON`,{
+        method: 'GET',
+        headers: getAuthorizationHeader(),
+      });
+    }
   } else {
-    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?filter=Class1 eq '文化類' or Class2 eq '文化類'&$top=${page*9}&$format=JSON`,{
-      method: 'GET',
-      // headers: getAuthorizationHeader(),
-    });
+    if (keyword) {
+      response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?$filter=contains(ScenicSpotName, '${keyword}')&$top=${page*9}&$format=JSON`,{
+        method: 'GET',
+        headers: getAuthorizationHeader(),
+      });
+    } else {
+      response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?$filter=Class1 eq '文化類' or Class2 eq '文化類'&$top=${page*9}&$format=JSON`,{
+        method: 'GET',
+        headers: getAuthorizationHeader(),
+      });
+    }
   }
   const spots = await response.json();
 
@@ -80,18 +94,32 @@ export async function getCultureSpots(requestInfo) {
 }
 
 export async function getOutdoorSpots(requestInfo) {
-  const {city, page} =requestInfo;
+  const {city, page, keyword} =requestInfo;
   let response;
   if (city && city !== 'undefined') {
-    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${city}?$top=${page*9}&$format=JSON`,{
-      method: 'GET',
-      // headers: getAuthorizationHeader(),
-    });
+    if (keyword) {
+      response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${city}?$filter=contains(ScenicSpotName, '${keyword}')&$top=${page*9}&$format=JSON`,{
+        method: 'GET',
+        headers: getAuthorizationHeader(),
+      });
+    } else {
+      response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${city}?$top=${page*9}&$format=JSON`,{
+        method: 'GET',
+        headers: getAuthorizationHeader(),
+      });
+    }
   } else {
-    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?$top=${page*9}&$format=JSON`,{
-      method: 'GET',
-      // headers: getAuthorizationHeader(),
-    });
+    if (keyword) {
+      response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?$filter=contains(ScenicSpotName, '${keyword}')&$top=${page*9}&$format=JSON`,{
+        method: 'GET',
+        headers: getAuthorizationHeader(),
+      });
+    } else {
+      response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?$top=${page*9}&$format=JSON`,{
+        method: 'GET',
+        headers: getAuthorizationHeader(),
+      });
+    }
   }
   const spots = await response.json();
 
@@ -103,18 +131,32 @@ export async function getOutdoorSpots(requestInfo) {
 }
 
 export async function getTempleSpots(requestInfo) {
-  const {city, page} =requestInfo;
+  const {city, page, keyword} =requestInfo;
   let response;
   if (city && city !== 'undefined') {
-    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${city}?$filter=contains(ScenicSpotName,'寺')&$top=${page*9}&$format=JSON`,{
-      method: 'GET',
-      // headers: getAuthorizationHeader(),
-    });
+    if (keyword) {
+      response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${city}?$filter=contains(ScenicSpotName, '${keyword}')&$top=${page*9}&$format=JSON`,{
+        method: 'GET',
+        headers: getAuthorizationHeader(),
+      });
+    } else {
+      response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${city}?$filter=contains(ScenicSpotName,'寺')&$top=${page*9}&$format=JSON`,{
+        method: 'GET',
+        // headers: getAuthorizationHeader(),
+      });
+    }
   } else {
-    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?$filter=contains(ScenicSpotName,'寺')&$top=${page*9}&$format=JSON`,{
-      method: 'GET',
-      // headers: getAuthorizationHeader(),
-    });
+    if (keyword) {
+      response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?$filter=contains(ScenicSpotName, '${keyword}')&$top=${page*9}&$format=JSON`,{
+        method: 'GET',
+        headers: getAuthorizationHeader(),
+      });
+    } else {
+      response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?$filter=contains(ScenicSpotName,'寺')&$top=${page*9}&$format=JSON`,{
+        method: 'GET',
+        headers: getAuthorizationHeader(),
+      });
+    }
   }
   const spots = await response.json();
 
@@ -126,18 +168,32 @@ export async function getTempleSpots(requestInfo) {
 }
 
 export async function getFamilyActivities(requestInfo) {
-  const {city, page} =requestInfo;
+  const {city, page, keyword} =requestInfo;
   let response;
   if (city && city !== 'undefined') {
-    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity/${city}?$filter=Class1 eq '藝文活動' or Class2 eq '藝文活動'&$top=${page*9}&$format=JSON`,{
-      method: 'GET',
-      // headers: getAuthorizationHeader(),
-    });
+    if (keyword) {
+      response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity/${city}?$filter=contains(ActivityName, '${keyword}')&$top=${page*9}&$format=JSON`,{
+        method: 'GET',
+        headers: getAuthorizationHeader(),
+      });
+    } else {
+      response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity/${city}?$filter=Class1 eq '藝文活動' or Class2 eq '藝文活動'&$top=${page*9}&$format=JSON`,{
+        method: 'GET',
+        headers: getAuthorizationHeader(),
+      });
+    }
   } else {
-    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity?$filter=Class1 eq '藝文活動' or Class2 eq '藝文活動'&$top=${page*9}&$format=JSON`,{
-      method: 'GET',
-      // headers: getAuthorizationHeader(),
-    });
+    if (keyword) {
+      response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity?$filter=contains(ActivityName, '${keyword}')&$top=${page*9}&$format=JSON`,{
+        method: 'GET',
+        headers: getAuthorizationHeader(),
+      });
+    } else {
+      response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity?$filter=Class1 eq '藝文活動' or Class2 eq '藝文活動'&$top=${page*9}&$format=JSON`,{
+        method: 'GET',
+        headers: getAuthorizationHeader(),
+      });
+    }
   }
   const activities = await response.json();
 
@@ -149,18 +205,32 @@ export async function getFamilyActivities(requestInfo) {
 }
 
 export async function getScenicAreas(requestInfo) {
-  const {city, page} =requestInfo;
+  const {city, page, keyword} =requestInfo;
   let response;
   if (city && city !== 'undefined') {
-    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${city}?$filter=Class1 eq '國家風景區類' or Class2 eq '國家風景區類'&$top=${page*9}&$format=JSON`,{
-      method: 'GET',
-      // headers: getAuthorizationHeader(),
-    });
+    if (keyword) {
+      response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${city}?$filter=contains(ScenicSpotName, '${keyword}')&$top=${page*9}&$format=JSON`,{
+        method: 'GET',
+        headers: getAuthorizationHeader(),
+      });
+    } else {
+      response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot/${city}?$filter=Class1 eq '國家風景區類' or Class2 eq '國家風景區類'&$top=${page*9}&$format=JSON`,{
+        method: 'GET',
+        headers: getAuthorizationHeader(),
+      });
+    }
   } else {
-    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?$filter=Class1 eq '國家風景區類' or Class2 eq '國家風景區類'&$top=${page*9}&$format=JSON`,{
-      method: 'GET',
-      // headers: getAuthorizationHeader(),
-    });
+    if (keyword) {
+      response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?$filter=contains(ScenicSpotName, '${keyword}')&$top=${page*9}&$format=JSON`,{
+        method: 'GET',
+        headers: getAuthorizationHeader(),
+      });
+    } else {
+      response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?$filter=Class1 eq '國家風景區類' or Class2 eq '國家風景區類'&$top=${page*9}&$format=JSON`,{
+        method: 'GET',
+        headers: getAuthorizationHeader(),
+      });
+    }
   }
   const areas = await response.json();
 
@@ -172,18 +242,32 @@ export async function getScenicAreas(requestInfo) {
 }
 
 export async function getRestaurants(requestInfo) {
-  const {city, page} =requestInfo;
+  const {city, page, keyword} =requestInfo;
   let response;
   if (city && city !== 'undefined') {
-    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant/${city}?$top=${page*9}&$format=JSON`,{
-      method: 'GET',
-      // headers: getAuthorizationHeader(),
-    });
+    if (keyword) {
+      response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant/${city}?$filter=contains(RestaurantName, '${keyword}')&$top=${page*9}&$format=JSON`,{
+        method: 'GET',
+        headers: getAuthorizationHeader(),
+      });
+    } else {
+      response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant/${city}?$top=${page*9}&$format=JSON`,{
+        method: 'GET',
+        headers: getAuthorizationHeader(),
+      });
+    }
   } else {
-    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant?$top=${page*9}&$format=JSON`,{
-      method: 'GET',
-      // headers: getAuthorizationHeader(),
-    });
+    if (keyword) {
+      response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant?$filter=contains(RestaurantName, '${keyword}')&$top=${page*9}&$format=JSON`,{
+        method: 'GET',
+        headers: getAuthorizationHeader(),
+      });
+    } else {
+      response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Restaurant?$top=${page*9}&$format=JSON`,{
+        method: 'GET',
+        headers: getAuthorizationHeader(),
+      });
+    }
   }
   const restaurants = await response.json();
 
@@ -195,18 +279,32 @@ export async function getRestaurants(requestInfo) {
 }
 
 export async function getHotels(requestInfo) {
-  const {city, page} =requestInfo;
+  const {city, page, keyword} =requestInfo;
   let response;
   if (city && city !== 'undefined') {
-    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Hotel/${city}?$top=${page*9}&$format=JSON`,{
-      method: 'GET',
-      // headers: getAuthorizationHeader(),
-    });
+    if (keyword) {
+      response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Hotel/${city}?$filter=contains(HotelName, '${keyword}')&$top=${page*9}&$format=JSON`,{
+        method: 'GET',
+        headers: getAuthorizationHeader(),
+      });
+    } else {
+      response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Hotel/${city}?$top=${page*9}&$format=JSON`,{
+        method: 'GET',
+        headers: getAuthorizationHeader(),
+      });
+    }
   } else {
-    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Hotel?$top=${page*9}&$format=JSON`,{
-      method: 'GET',
-      // headers: getAuthorizationHeader(),
-    });
+    if (keyword) {
+      response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Hotel?$filter=contains(HotelName, '${keyword}')&$top=${page*9}&$format=JSON`,{
+        method: 'GET',
+        headers: getAuthorizationHeader(),
+      });
+    } else {
+      response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Hotel?$top=${page*9}&$format=JSON`,{
+        method: 'GET',
+        headers: getAuthorizationHeader(),
+      });
+    }
   }
   const hotels = await response.json();
 
@@ -218,18 +316,32 @@ export async function getHotels(requestInfo) {
 }
 
 export async function getActivities(requestInfo) {
-  const {city, page} =requestInfo;
+  const {city, page, keyword} =requestInfo;
   let response;
   if (city && city !== 'undefined') {
-    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity/${city}?$top=${page*9}&$format=JSON`,{
-      method: 'GET',
-      // headers: getAuthorizationHeader(),
-    });
+    if (keyword) {
+      response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity/${city}?$filter=contains(ActivityName, '${keyword}')&$top=${page*9}&$format=JSON`,{
+        method: 'GET',
+        headers: getAuthorizationHeader(),
+      });
+    } else {
+      response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity/${city}?$top=${page*9}&$format=JSON`,{
+        method: 'GET',
+        headers: getAuthorizationHeader(),
+      });
+    }
   } else {
-    response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity?$top=${page*9}&$format=JSON`,{
-      method: 'GET',
-      // headers: getAuthorizationHeader(),
-    });
+    if (keyword) {
+      response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity?$filter=contains(ActivityName, '${keyword}')&$top=${page*9}&$format=JSON`,{
+        method: 'GET',
+        headers: getAuthorizationHeader(),
+      });
+    } else {
+      response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/Activity?$top=${page*9}&$format=JSON`,{
+        method: 'GET',
+        headers: getAuthorizationHeader(),
+      });
+    }
   }
   const activities = await response.json();
 
@@ -243,7 +355,7 @@ export async function getNearbySpots(requestInfo) {
   const { type, position, id} = requestInfo;
   const response = await fetch(`https://ptx.transportdata.tw/MOTC/v2/Tourism/${type}?$filter=${type}ID ne '${id}'&$spatialFilter=nearby(${position.lat},${position.lon},5000)&$top=3&$format=JSON`,{
     method: 'GET',
-    // headers: getAuthorizationHeader(),
+    headers: getAuthorizationHeader(),
   });
   const spots = await response.json();
 

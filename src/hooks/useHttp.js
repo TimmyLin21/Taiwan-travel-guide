@@ -47,7 +47,7 @@ const useHttp = (
         if (needPagination) {
           responseData.length < 9
             ? reduxDispatch(paginationActions.delHasMore())
-            : console.log('No more');
+            : reduxDispatch(paginationActions.addHasMore());
         }
       } catch (error) {
         dispatch({
