@@ -2,7 +2,6 @@ import { createGlobalStyle } from "styled-components";
 import { device } from "./break-point";
 
 export const GlobalStyles = createGlobalStyle`
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap');
   h1,h2,h3,h4,p, span {
     font-family: 'Noto Sans TC', sans-serif;
   }

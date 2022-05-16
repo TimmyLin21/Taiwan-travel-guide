@@ -41,9 +41,11 @@ const useHttp = (
   const sendRequest = useCallback(
     async (requestData) => {
       dispatch({ type: "SEND" });
+      reduxDispatch(loadingActions.setStatus({ status: 'pending' }));
       try {
         const responseData = await requestFunction(requestData);
         dispatch({ type: "SUCCESS", responseData });
+        reduxDispatch(loadingActions.setStatus({ status: 'completed' }));
         if (needPagination) {
           responseData.length < 9
             ? reduxDispatch(paginationActions.delHasMore())
@@ -54,11 +56,11 @@ const useHttp = (
           type: "ERROR",
           errorMessage: error.message || "Something went wrong!",
         });
+        reduxDispatch(loadingActions.setStatus({ status: 'completed' }));
       }
     },
     [requestFunction, needPagination, reduxDispatch]
-  );
-  reduxDispatch(loadingActions.setStatus({ status: httpState.status }));
+    );
   return { sendRequest, ...httpState };
 };
 

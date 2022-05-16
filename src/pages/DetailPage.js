@@ -56,14 +56,16 @@ const DetailPage = () => {
   }, [sendRequest, id, type]);
 
   useEffect(() => {
-    requestNearbySpots({
-      type,
-      position: {
-        lat: siteInfo?.Position?.PositionLat,
-        lon: siteInfo?.Position?.PositionLon,
-      },
-      id: id
-    });
+    if(siteInfo?.Position){
+      requestNearbySpots({
+        type,
+        position: {
+          lat: siteInfo?.Position?.PositionLat,
+          lon: siteInfo?.Position?.PositionLon,
+        },
+        id: id
+      });
+    }
   }, [requestNearbySpots, type, siteInfo, id]);
 
   let mappedSites, transferedDescription;
@@ -80,7 +82,7 @@ const DetailPage = () => {
 
   if(siteInfo?.DescriptionDetail) {
     const splittedStrings = siteInfo.DescriptionDetail.split('。');
-    transferedDescription = splittedStrings.map((string) => <p>{string}。</p>);
+    transferedDescription = splittedStrings.map((string,index) => <p key={index}>{string}。</p>);
   }
 
   if (status === "pending") {
