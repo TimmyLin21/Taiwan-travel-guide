@@ -16,12 +16,18 @@ const Menu = () => {
     if (e.key === 'Enter') {
       const keyword = e.target.value;
       dispatch(headerActions.setEnteredKeyword({ keyword }));
+      if (window.innerWidth < 1080) {
+        dispatch(headerActions.hideMenu());
+      }
       searchResult({keyword, city:'', theme:''});
     }
   };
 
   const cancelHandler = () => {
     dispatch(headerActions.setEnteredKeyword({ keyword: '' }));
+    if (window.innerWidth < 1080) {
+      dispatch(headerActions.hideMenu());
+    }
     setEnteredKeyword('');
     searchResult({keyword:'', city:'', theme:''});
   }

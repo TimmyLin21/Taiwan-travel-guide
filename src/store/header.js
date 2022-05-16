@@ -19,6 +19,9 @@ const headerSlice = createSlice({
     showMenu(state) {
       state.menuIsShow = true;
     },
+    hideOption(state) {
+      state.optionsIsShow = false;
+    },
     optionToggle(state) {
       state.optionsIsShow = !state.optionsIsShow;
     },

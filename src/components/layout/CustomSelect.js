@@ -104,10 +104,14 @@ const CustomSelect = () => {
   const selectedCity = useSelector((state) => state.header.selectedCity?.cityName);
   
   const cityChangeHandler = (e) => {
+    e.stopPropagation();
     const cityName = e.target.innerText;
     const cityEngName = e.target.dataset.name;
     dispatch(headerActions.changeCity({city: {cityName, cityEngName}}));
-    dispatch(headerActions.optionToggle());
+    dispatch(headerActions.hideOption());
+    if (window.innerWidth < 1080) {
+      dispatch(headerActions.hideMenu());
+    }
     dispatch(paginationActions.clearPageIndex());
     searchResult({keyword:'', city: cityEngName, theme:''});
   }

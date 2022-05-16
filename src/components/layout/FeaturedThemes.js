@@ -27,6 +27,9 @@ const FeaturedThemes = () => {
   const changeThemeHandler = (e) => {
     const theme = e.target.dataset.theme;
     dispatch(headerActions.changeTheme({theme}));
+    if (window.innerWidth < 1080) {
+      dispatch(headerActions.hideMenu());
+    }
     dispatch(paginationActions.clearPageIndex());
     window.scrollTo({top:0, behavior:'smooth'});
     searchResult({keyword:'', city: '', theme});
