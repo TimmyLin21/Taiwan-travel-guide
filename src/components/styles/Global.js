@@ -52,6 +52,7 @@ export const GlobalStyles = createGlobalStyle`
     --color-bg: rgba(250, 250, 250, 1);
     --shadow-sm: 0px 9.77842px 16.763px rgba(0, 0, 0, 0.04);
     --shadow-md: 0px 14px 24px rgba(0, 0, 0, 0.04);
+    --shadow-lg: 0px 5px 15px rgba(0, 0, 0, 0.35);
     --radius-sm: .5rem;
     --radius-md: 1rem;
   }

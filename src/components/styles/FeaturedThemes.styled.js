@@ -30,6 +30,8 @@ export const FeaturedThemesContainer = styled.div`
   li {
     width: 48%;
     margin-bottom: 0.75rem;
+    position: relative;
+    overflow: hidden;
   }
 `;
 
@@ -42,12 +44,53 @@ export const ThemeButton = styled.button`
   padding: 0.5rem 0;
   ${({ $active }) => ($active ? "border-radius: var(--radius-sm)" : "")};
   ${({ $active }) =>
-    $active ? "border: 1px solid var(--color-primary)" : "border: 1px solid transparent"};
-  &:hover {
+    $active
+      ? "border: 1px solid var(--color-primary)"
+      : "border: 1px solid transparent"};
+  &:before {
     border-radius: var(--radius-sm);
-    border: 1px solid var(--color-primary);
+    transform: translateX(100%);
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 99.5%;
+    height: 2px;
+    border-bottom: 1px solid transparent;
+    border-left: 1px solid transparent;
   }
-`
+  
+  &:after {
+    border-radius: var(--radius-sm);
+    transform: translateX(-100%);
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 99.5%;
+    height: 2px;
+    border-top: 1px solid transparent;
+    border-right: 1px solid transparent;
+  }
+  ${({ $active }) =>
+    $active
+      ? ""
+      : `&:hover {
+        &:before {
+          transition: .1s transform linear, .1s height linear .1s;
+          transform: translateX(0);
+          height: 100%;
+          border-color: var(--color-primary);
+        }
+        &:after {
+          transition: .1s transform linear .2s, .1s height linear .3s;
+          transform: translateX(0);
+          height: 100%;
+          border-color: var(--color-primary);
+        }
+      }`};
+
+`;
 
 export const FortZeelandiaIcon = styled.span`
   &::after {

@@ -3,10 +3,12 @@ import SiteInfo from "../components/sites/SiteInfo";
 import SiteItem from "../components/sites/SiteItem";
 import {
   DetailContainer,
-  BackIcon,
+  BackButton,
   PrintIcon,
   ShareIcon,
   InfoCard,
+  BumpButton,
+  DescriptionContainer
 } from "../components/styles/DetailPage.styled";
 import { Flex } from "../components/styles/Flex.styled";
 import { SiteGrid } from "../components/styles/SitesList.styled";
@@ -64,7 +66,7 @@ const DetailPage = () => {
     });
   }, [requestNearbySpots, type, siteInfo, id]);
 
-  let mappedSites;
+  let mappedSites, transferedDescription;
   if (nearbySpots) {
     mappedSites = nearbySpots.map((site) => {
       const id =
@@ -76,26 +78,31 @@ const DetailPage = () => {
     });
   }
 
+  if(siteInfo?.DescriptionDetail) {
+    const splittedStrings = siteInfo.DescriptionDetail.split('。');
+    transferedDescription = splittedStrings.map((string) => <p>{string}。</p>);
+  }
+
   if (status === "pending") {
-    return <div>123</div>;
+    return <div></div>;
   }
   return (
     <DetailContainer>
       <Flex justifyContent="space-between">
         <Flex>
-          <button type="button">
-            <BackIcon onClick={goBackHandler} />
-          </button>
+          <BackButton type="button" onClick={goBackHandler}>
+            <span />
+          </BackButton>
           <h2>{siteInfo[name]}</h2>
         </Flex>
         <div>
-          <button type="button" onClick={printHandler}>
+          <BumpButton type="button" onClick={printHandler}>
             <PrintIcon />
-          </button>
+          </BumpButton>
           {navigator.share && (
-            <button type="button" onClick={shareHandler}>
+            <BumpButton type="button" onClick={shareHandler}>
               <ShareIcon />
-            </button>
+            </BumpButton>
           )}
         </div>
       </Flex>
@@ -111,11 +118,11 @@ const DetailPage = () => {
         />
       </InfoCard>
       <h3>景點介紹</h3>
-      <p>
-        {siteInfo.DescriptionDetail ||
+      <DescriptionContainer>
+        {transferedDescription ||
           siteInfo.Description ||
           `店家尚未提供介紹喔 (ఠ్ఠ ˓̭ ఠ్ఠ)`}
-      </p>
+      </DescriptionContainer>
       <h3>交通方式</h3>
       <MapContainer
         center={sitePosition}
@@ -132,7 +139,7 @@ const DetailPage = () => {
         </Marker>
       </MapContainer>
       <p>{siteInfo.TravelInfo || ""}</p>
-      <h3>更多景點</h3>
+      <h3>鄰近景點</h3>
       <SiteGrid>{mappedSites}</SiteGrid>
     </DetailContainer>
   );

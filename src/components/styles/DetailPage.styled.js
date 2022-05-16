@@ -40,6 +40,11 @@ export const InfoCard = styled.div`
   background-color: var(--color-tertiary);
   border-radius: var(--radius-sm);
   margin-bottom: 1.5rem;
+  p {
+    display: flex;
+    align-items: center;
+    line-height: 1.2;
+  }
   p:not(:last-child) {
     margin-bottom: .5rem;
   }
@@ -49,9 +54,22 @@ export const InfoCard = styled.div`
   }
 `
 
-export const BackIcon = styled.span`
-  &::after {
-    content: url(${backIcon});
+export const BackButton = styled.button`
+  transition: transform .5s ease-in-out;
+  span {
+    &::after {
+      content: url(${backIcon});
+    }
+  }
+  &:hover {
+    transform: translateX(-.25rem);
+  }
+`
+
+export const BumpButton = styled.button`
+  :hover {
+    animation: pulse;
+    animation-duration: 1s;
   }
 `
 
@@ -65,5 +83,13 @@ export const PrintIcon = styled.span`
 export const ShareIcon = styled.span`
   &::after {
     content: url(${share});
+  }
+`
+
+export const DescriptionContainer = styled.span`
+  p {
+    line-height: 1.5rem;
+    letter-spacing: .5px;
+    margin-bottom: 1.5rem;
   }
 `

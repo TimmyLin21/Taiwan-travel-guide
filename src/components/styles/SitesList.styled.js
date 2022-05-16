@@ -47,6 +47,10 @@ export const BlueLocation = styled.span`
 export const SiteCard = styled.li`
   box-shadow: var(--shadow-md);
   border-radius: var(--radius-md);
+  transition: .3s ease-in-out;
+  &:hover {
+    box-shadow: var(--shadow-lg);
+  }
   button {
     width: 100%;
   }
