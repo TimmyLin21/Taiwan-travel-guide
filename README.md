@@ -36,47 +36,56 @@ Demo：[https://taiwantravelguide-9465d.web.app/](https://taiwantravelguide-9465
 ### 首頁
 
 ![首頁](https://i.imgur.com/MyNoQ4d.png)
+<br>
 
 ### 搜尋結果
 
 ![搜尋結果](https://i.imgur.com/qWTyEBH.png)
+<br>
 
 ### 景點介紹
 
 ![景點介紹](https://i.imgur.com/bubjOEe.png)
+<br>
 
 ### leaflet 地圖服務
 
 ![leaflet](https://i.imgur.com/oMhaIlt.png)
+<br>
 
 ### 搜尋
 
-<img src="https://i.imgur.com/ZILFB3m.gif" width="350">
+<img src="https://i.imgur.com/5IXIVO9.gif" width="350">
 
 * 城市篩選
 * 主題精選
 * 關鍵字搜尋
+<br>
 
 ### 載入更多
 
 <img src="https://i.imgur.com/RnuWo8m.gif" width="350">
+<br>
 
 ### 列印
 
 <img src="https://i.imgur.com/IH2MBC7.gif" width="350">
+<br>
 
 ### 分享
 
 <img src="https://i.imgur.com/b8noQCE.gif" width="350">
+<br>
 
 ### 轉場動畫
 
 <img src="https://i.imgur.com/bxo3XeL.gif" width="350">
+<br>
 
 ### 404 頁面
 
 <img src="https://i.imgur.com/LsQnz8G.gif" width="350">
-
+<br>
 <hr>
 
 其餘更多細節部分，歡迎至 Demo 網站觀看 [https://taiwantravelguide-9465d.web.app/](https://taiwantravelguide-9465d.web.app/)
