@@ -55,7 +55,7 @@ Demo：[https://taiwantravelguide-9465d.web.app/](https://taiwantravelguide-9465
 
 ### 搜尋
 
-<a href="https://imgur.com/5IXIVO9"><img src="https://i.imgur.com/5IXIVO9.gif" title="搜尋 " /></a>
+<a href="https://imgur.com/5IXIVO9"><img src="https://i.imgur.com/5IXIVO9.gif" title="搜尋 Demo" /></a>
 
 * 城市篩選
 * 主題精選
