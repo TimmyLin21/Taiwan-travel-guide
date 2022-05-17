@@ -59,23 +59,23 @@ Demo：[https://taiwantravelguide-9465d.web.app/](https://taiwantravelguide-9465
 
 ### 載入更多
 
-<img src="https://i.imgur.com/RnuWo8m.gif width="350">
+<img src="https://i.imgur.com/RnuWo8m.gif" width="350">
 
 ### 列印
 
-<img src="https://i.imgur.com/IH2MBC7.gif width="350">
+<img src="https://i.imgur.com/IH2MBC7.gif" width="350">
 
 ### 分享
 
-<img src="https://i.imgur.com/b8noQCE.gif width="350">
+<img src="https://i.imgur.com/b8noQCE.gif" width="350">
 
 ### 轉場動畫
 
-<img src="https://i.imgur.com/IH2MBC7.gif width="350">
+<img src="https://i.imgur.com/IH2MBC7.gif" width="350">
 
 ### 404 頁面
 
-<img src="https://i.imgur.com/LsQnz8G.gif width="350">
+<img src="https://i.imgur.com/LsQnz8G.gif" width="350">
 
 <hr>
 
