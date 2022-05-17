@@ -16,6 +16,7 @@ Demo：[https://taiwantravelguide-9465d.web.app/](https://taiwantravelguide-9465
 * 引入 `React Redux` 與 `React Router`
 * 引入 `Styled Component` 樣式管理
 * 引入 `Leaflet` 地圖服務
+* 串接[交通部 TDX API](https://tdx.transportdata.tw/api-service/swagger)
 * 統一管理 API 路徑
 * 使用 Custom Hooks 管理共用邏輯
 * 使用 lazy loading 延遲載入頁面
