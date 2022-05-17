@@ -51,7 +51,7 @@ Demo：[https://taiwantravelguide-9465d.web.app/](https://taiwantravelguide-9465
 
 ### 搜尋
 
-![搜尋](https://i.imgur.com/ZILFB3m.gifv)
+![搜尋](https://i.imgur.com/ZILFB3m.gif)
 
 * 城市篩選
 * 主題精選
@@ -59,23 +59,23 @@ Demo：[https://taiwantravelguide-9465d.web.app/](https://taiwantravelguide-9465
 
 ### 載入更多
 
-![載入更多](https://i.imgur.com/RnuWo8m.gifv)
+![載入更多](https://i.imgur.com/RnuWo8m.gif)
 
 ### 列印
 
-![列印](https://i.imgur.com/IH2MBC7.gifv)
+![列印](https://i.imgur.com/IH2MBC7.gif)
 
 ### 分享
 
-![分享](https://i.imgur.com/b8noQCE.gifv)
+![分享](https://i.imgur.com/b8noQCE.gif)
 
 ### 轉場動畫
 
-![轉場動畫](https://i.imgur.com/IH2MBC7.gifv)
+![轉場動畫](https://i.imgur.com/IH2MBC7.gif)
 
 ### 404 頁面
 
-![404 頁面](https://i.imgur.com/LsQnz8G.gifv)
+![404 頁面](https://i.imgur.com/LsQnz8G.gif)
 
 <hr>
 
