@@ -71,7 +71,7 @@ Demo：[https://taiwantravelguide-9465d.web.app/](https://taiwantravelguide-9465
 
 ### 轉場動畫
 
-<img src="https://i.imgur.com/IH2MBC7.gif" width="350">
+<img src="https://i.imgur.com/bxo3XeL.gif" width="350">
 
 ### 404 頁面
 
